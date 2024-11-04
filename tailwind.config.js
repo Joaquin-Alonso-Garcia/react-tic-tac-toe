@@ -20,10 +20,10 @@ export default {
         'silver-500': '#DBE8ED',
       },
       fontSize: {
-        'heding-lg': '40px',
-        'heding-md': '24px',
-        'heding-sm': '20px',
-        'heding-xs': '16px',
+        'heading-lg': '40px',
+        'heading-md': '24px',
+        'heading-sm': '20px',
+        'heading-xs': '16px',
         'body': '14px',
       }
     },

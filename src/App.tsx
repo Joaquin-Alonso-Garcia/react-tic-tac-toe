@@ -1,10 +1,33 @@
+import { useState } from 'react';
 import './App.css'
 import Menu from './components/Menu';
+import Game from './components/Game';
 
-function App() {
+const App: React.FC = () => {
+  const [screen, setScreen] = useState<'menu' | 'board'>('menu');
+  const [isXFirst, setIsXFirst] = useState<boolean>(true);
+
+  const handleGameStarts = (isXFirst: boolean) => {
+    setIsXFirst(isXFirst);
+    setScreen('board');
+  };
+
+  const handleQuit = () => {
+    setScreen('menu');
+  };
+
+  const handleNextRound = () => {
+    setIsXFirst(prev => !prev);
+    setScreen('board');
+  };
+
   return (
     <>
-      <Menu />
+      {screen === 'menu' ? (
+        <Menu onGameStarts={handleGameStarts} />
+      ) : (
+        <Game isXFirst={isXFirst} handleQuit={handleQuit} handleNextRound={handleNextRound} />
+      )}
     </>
   )
 }

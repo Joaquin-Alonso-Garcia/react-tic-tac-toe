@@ -1,13 +1,13 @@
 @font-face {
   font-family: 'Outfit';
-    src:url('/public/assets/fonts/Outfit-Medium.ttf') format('truetype');
+    src:url('/assets/fonts/Outfit-Medium.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
   font-family: 'Outfit';
-    src:url('/public/assets/fonts/Outfit-Bold.ttf') format('truetype');
+    src:url('/assets/fonts/Outfit-Bold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
 }
@@ -22,4 +22,30 @@
 
 .btn-secondary-shadow {
   box-shadow: 0 -8px 0 0 #118C87 inset;
+}
+
+.turn-shadow {
+  box-shadow: 0 -4px 0 0 #10212A inset;
+}
+
+.board.grid {
+  grid-template-columns: repeat(3, 140px);
+  gap: 20px;
+  grid-auto-flow: row;
+}
+
+.square {
+  box-shadow: 0 -8px 0 0 #10212A inset;
+}
+
+.overlay {
+  background-color: #0F1B20;
+}
+
+.btn-endgame-primary-shadow {
+  box-shadow: 0 -4px 0 0 #CC8B13 inset;
+}
+
+.btn-endgame-secondary-shadow {
+  box-shadow: 0 -4px 0 0 #118C87 inset;
 }
