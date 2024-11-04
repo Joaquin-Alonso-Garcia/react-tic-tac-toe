@@ -16,6 +16,7 @@ const Board: React.FC<BoardProps> = ({ isXFirst, xIsNext, squares, onPlay, handl
   const [winnerMark, setWinnerMark] = useState<string | null>(null);
   const [isPlayerOneWins, setIsPlayerOneWins] = useState<boolean>(false);
   const [winningLine, setWinningLine] = useState<number[] | null>(null);
+  const [isTie, setIsTie] = useState<boolean>(false);
 
   useEffect(() => {
     const result = calculateWinner(squares);
@@ -25,6 +26,9 @@ const Board: React.FC<BoardProps> = ({ isXFirst, xIsNext, squares, onPlay, handl
       setWinningLine(result.line)
       setIsEndGame(true);
       setIsPlayerOneWins(result.mark === 'X' ? isXFirst : !isXFirst);
+    } else if (squares.every(square => square !== null)) {
+      setIsTie(true);
+      setIsEndGame(true);
     }
   }, [squares, isXFirst]);
 
@@ -55,10 +59,11 @@ const Board: React.FC<BoardProps> = ({ isXFirst, xIsNext, squares, onPlay, handl
           playerWins={isPlayerOneWins}
           handleQuit={handleQuit}
           handleNextRound={handleNextRound}
+          isTie={isTie}
         />
       )}
     </>
-  )
+  );
 };
 
 function calculateWinner(squares: (string | null)[]) {
