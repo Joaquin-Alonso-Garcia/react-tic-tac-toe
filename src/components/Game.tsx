@@ -5,15 +5,22 @@ import Menu from './Menu';
 interface GameProps {
   isXFirst: boolean;
   handleQuit: () => void;
-  handleNextRound: () => void;
+  // handleNextRound: () => void;
 }
 
-const Game: React.FC<GameProps> = ({ isXFirst, handleQuit, handleNextRound }) => {
+const Game: React.FC<GameProps> = ({ isXFirst, handleQuit }) => {
   const [history, setHistory] = useState<(string | null)[][]>(Array(9).fill(null));
   const [currentMove, setCurrentMove] = useState<number>(isXFirst ? 0 : 1);
   const xIsNext: boolean = currentMove % 2 === 0;
   const currentSquares = history[currentMove] || Array(9).fill(null);
   const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [roundKey, setRoundKey] = useState<number>(0);
+
+  const startNextRound = () => {
+    setHistory(Array(9).fill(null));
+    setCurrentMove(currentMove + 1);
+    setRoundKey(prevRoundKey => prevRoundKey + 1);
+  };
 
   function handlePlay(nextSquares: (string | null)[]) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
@@ -29,18 +36,6 @@ const Game: React.FC<GameProps> = ({ isXFirst, handleQuit, handleNextRound }) =>
       setCurrentMove(currentMove - 1);
     }
   }
-
-  // function handleQuit() {
-  //   setShowMenu(true);
-  //   setHistory([Array(9).fill(null)]);
-  //   setIsEndgame(false);
-  // }
-
-  // function handleNextRound() {
-  //   setHistory(Array(9).fill(null));
-  //   setCurrentMove(isXFirst ? 0 : 1);
-  //   setIsEndgame(false);
-  // }
 
   if(showMenu) {
     return <Menu onGameStarts={setShowMenu} />;
@@ -67,12 +62,13 @@ const Game: React.FC<GameProps> = ({ isXFirst, handleQuit, handleNextRound }) =>
           </div>
 
           <Board
+            key={roundKey}
             isXFirst={isXFirst}
             xIsNext={xIsNext}
             squares={currentSquares}
             onPlay={handlePlay}
             handleQuit={handleQuit}
-            handleNextRound={handleNextRound}
+            handleNextRound={startNextRound}
           />
         </>
       )}

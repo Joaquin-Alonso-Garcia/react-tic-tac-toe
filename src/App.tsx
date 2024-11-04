@@ -16,17 +16,12 @@ const App: React.FC = () => {
     setScreen('menu');
   };
 
-  const handleNextRound = () => {
-    setIsXFirst(prev => !prev);
-    setScreen('board');
-  };
-
   return (
     <>
       {screen === 'menu' ? (
         <Menu onGameStarts={handleGameStarts} />
       ) : (
-        <Game isXFirst={isXFirst} handleQuit={handleQuit} handleNextRound={handleNextRound} />
+        <Game isXFirst={isXFirst} handleQuit={handleQuit} />
       )}
     </>
   )

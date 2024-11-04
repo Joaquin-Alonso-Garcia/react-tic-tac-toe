@@ -11,18 +11,20 @@ interface BoardProps {
   handleQuit: () => void;
 }
 
-const Board: React.FC<BoardProps> = ({ isXFirst, xIsNext, squares, onPlay, handleNextRound, handleQuit }) => {
+const Board: React.FC<BoardProps> = ({ isXFirst, xIsNext, squares, onPlay, handleQuit, handleNextRound }) => {
   const [isEndgame, setIsEndGame] = useState<boolean>(false);
-  const [winner, setWinner] = useState<string | null>(null);
+  const [winnerMark, setWinnerMark] = useState<string | null>(null);
   const [isPlayerOneWins, setIsPlayerOneWins] = useState<boolean>(false);
+  const [winningLine, setWinningLine] = useState<number[] | null>(null);
 
   useEffect(() => {
-    const winningMark = calculateWinner(squares);
+    const result = calculateWinner(squares);
 
-    if (winningMark) {
-      setWinner(winningMark)
+    if (result) {
+      setWinnerMark(result.mark)
+      setWinningLine(result.line)
       setIsEndGame(true);
-      setIsPlayerOneWins(winningMark === 'X' ? isXFirst : !isXFirst);
+      setIsPlayerOneWins(result.mark === 'X' ? isXFirst : !isXFirst);
     }
   }, [squares, isXFirst]);
 
@@ -37,13 +39,19 @@ const Board: React.FC<BoardProps> = ({ isXFirst, xIsNext, squares, onPlay, handl
     <>
       <div className="grid board">
         {squares.map((value, index) => (
-          <Square key={index} value={value} onSquareClick={() => handleClick(index)} />
+          <Square
+            key={index}
+            value={value}
+            onSquareClick={() => handleClick(index)}
+            isWinningSquare={winningLine?.includes(index) || false}
+            winner={winnerMark}
+          />
         ))}
       </div>
 
       {isEndgame && (
         <EndGame
-          winner={winner}
+          winner={winnerMark}
           playerWins={isPlayerOneWins}
           handleQuit={handleQuit}
           handleNextRound={handleNextRound}
@@ -64,7 +72,7 @@ function calculateWinner(squares: (string | null)[]) {
     const [a, b, c] = lines[i];
 
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return { mark: squares[a], line: [a, b, c] };
     }
   }
   return null;
