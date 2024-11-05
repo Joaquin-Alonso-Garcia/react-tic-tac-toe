@@ -5,10 +5,14 @@ import Menu from './Menu';
 interface GameProps {
   isXFirst: boolean;
   handleQuit: () => void;
-  // handleNextRound: () => void;
+  vsCpu: boolean;
+  playerOneWins: number;
+  playerTwoWins: number;
+  ties: number;
+  updateScore: (result: 'playerOne' | 'playerTwo' | 'tie') => void;
 }
 
-const Game: React.FC<GameProps> = ({ isXFirst, handleQuit }) => {
+const Game: React.FC<GameProps> = ({ isXFirst, handleQuit, vsCpu, updateScore, playerOneWins, playerTwoWins, ties }) => {
   const [history, setHistory] = useState<(string | null)[][]>(Array(9).fill(null));
   const [currentMove, setCurrentMove] = useState<number>(isXFirst ? 0 : 1);
   const xIsNext: boolean = currentMove % 2 === 0;
@@ -38,13 +42,13 @@ const Game: React.FC<GameProps> = ({ isXFirst, handleQuit }) => {
   }
 
   if(showMenu) {
-    return <Menu onGameStarts={setShowMenu} />;
+    return <Menu onGameStart={setShowMenu} />;
   }
 
   return (
     <div className="game-container w-[460px]">
       {showMenu ? (
-        <Menu onGameStarts={() => setShowMenu(false)} />
+        <Menu onGameStart={() => setShowMenu(false)} />
       ) : (
         <>
           <div className="flex items-center justify-between mb-4 game-header">
@@ -69,6 +73,11 @@ const Game: React.FC<GameProps> = ({ isXFirst, handleQuit }) => {
             onPlay={handlePlay}
             handleQuit={handleQuit}
             handleNextRound={startNextRound}
+            vsCpu={vsCpu}
+            playerOneWins={playerOneWins}
+            playerTwoWins={playerTwoWins}
+            ties={ties}
+            updateScore={updateScore}
           />
         </>
       )}

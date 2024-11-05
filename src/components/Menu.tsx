@@ -1,7 +1,9 @@
 import { useState } from "react";
 
-const Menu: React.FC<{ onGameStarts: (isXFirst: boolean) => void}> = ({ onGameStarts }) => {
+const Menu: React.FC<{ onGameStart: (isXFirst: boolean, cpuGame: boolean) => void}> = ({ onGameStart }) => {
   const [xStarts, setXStarts] = useState<boolean>(true);
+  const vsCPU = true;
+  const vsPlayer = false;
 
   const handleChoice = () => {
     setXStarts(!xStarts);
@@ -60,14 +62,14 @@ const Menu: React.FC<{ onGameStarts: (isXFirst: boolean) => void}> = ({ onGameSt
       <button
         id="option-one"
         className="uppercase rounded-[15px] bg-light-yellow-400 pt-[17px] pb-[25px] px-[122.5px] font-bold text-heading-sm w-full btn-primary-shadow"
-        onClick={() => onGameStarts(xStarts)}
+        onClick={() => onGameStart(xStarts, vsCPU)}
       >
         New Game (vs CPU)
       </button>
       <button
         id="option-two"
         className="mt-5 uppercase rounded-[15px] bg-light-blue-400 pt-[17px] pb-[25px] px-[100px] font-bold text-heading-sm w-full btn-secondary-shadow"
-        onClick={() => onGameStarts(xStarts)}
+        onClick={() => onGameStart(xStarts, vsPlayer)}
       >
         New Game (vs Player)
       </button>
