@@ -23,6 +23,7 @@ const Board: React.FC<BoardProps> = ({ isXFirst, xIsNext, squares, vsCpu, onPlay
   const [winningLine, setWinningLine] = useState<number[] | null>(null);
   const [isTie, setIsTie] = useState<boolean>(false);
   const [firstMove, setFirstMove] = useState<boolean>(false);
+  const [isCpuTurn, setIsCpuTurn] = useState<boolean>(false);
 
   const makeCpuMove = useCallback(() => {
     const emptySquares = squares
@@ -34,6 +35,7 @@ const Board: React.FC<BoardProps> = ({ isXFirst, xIsNext, squares, vsCpu, onPlay
       const nextSquares = squares.slice();
       nextSquares[randomIndex] = isXFirst ? 'O' : 'X';
       onPlay(nextSquares);
+      setIsCpuTurn(false);
     }
   }, [squares, isXFirst, onPlay, isEndgame]);
 
@@ -63,12 +65,13 @@ const Board: React.FC<BoardProps> = ({ isXFirst, xIsNext, squares, vsCpu, onPlay
 
     if (vsCpu && !isEndgame && (isXFirst && !xIsNext) || (!isXFirst && xIsNext)) {
       const cpuMoveTimeout = setTimeout(() => makeCpuMove(), 1000);
+      setIsCpuTurn(true);
       return () => clearTimeout(cpuMoveTimeout);
     }
   }, [vsCpu, isXFirst, xIsNext, isEndgame, firstMove, makeCpuMove]);
 
   function handleClick(i: number) {
-    if (squares[i] || calculateWinner(squares)) return;
+    if (squares[i] || calculateWinner(squares) || isCpuTurn) return;
 
     const nextSquares: (string | null)[] = squares.slice();
     nextSquares[i] = xIsNext ? 'X' : 'O';
