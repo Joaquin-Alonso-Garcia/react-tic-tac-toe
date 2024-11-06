@@ -24,7 +24,7 @@ const EndGame: React.FC<EndGameProps> = ({ winner, playerWins, handleNextRound, 
             </div>
           ) : (
             <div className="flex gap-6">
-              <img src={markSrc} className="w-16 h-16" alt={`${winner} mark`} />
+              <img src={markSrc} className="md:w-16 md:h-16 w-[30px] h-[30px]" alt={`${winner} mark`} />
               <p className={`uppercase text-heading-lg mb-6 ${winner === 'X' ? 'text-silver-400' : 'text-light-yellow-400'}`}>
                 Takes the round
               </p>

@@ -13,7 +13,7 @@ const Square: React.FC<SquareProps> = ({ value, onSquareClick, isWinningSquare, 
 
   return (
     <button
-      className={`square rounded-[15px] h-[140px] bg-dark-navi-500 grid place-items-center
+      className={`square rounded-[15px] md:h-[140px] h-24 bg-dark-navi-500 grid place-items-center
         ${isWinningSquare ? winningColor : ''}`}
       onClick={onSquareClick}
     >

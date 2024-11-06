@@ -29,7 +29,7 @@
 }
 
 .board.grid {
-  grid-template-columns: repeat(3, 140px);
+  grid-template-columns: repeat(3, 96px);
   gap: 20px;
   grid-auto-flow: row;
 }
@@ -48,4 +48,12 @@
 
 .btn-endgame-secondary-shadow {
   box-shadow: 0 -4px 0 0 #118C87 inset;
+}
+
+@media only scree and (min-width: 798px) {
+  .board.grid {
+    grid-template-columns: repeat(3, 140px);
+    gap: 20px;
+    grid-auto-flow: row;
+  }
 }

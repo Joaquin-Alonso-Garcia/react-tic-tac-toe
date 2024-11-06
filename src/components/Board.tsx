@@ -94,19 +94,19 @@ const Board: React.FC<BoardProps> = ({ isXFirst, xIsNext, squares, vsCpu, onPlay
       </div>
 
       <div className="flex justify-between counters mt-[19px]">
-        <div className="w-[140px] h-[72px]]player-one-wins pt-[13px] px-[42px] pb-[11px] bg-light-blue-400 rounded-[15px] flex items-center flex-col">
+        <div className="md:w-[140px] w-24 h-16 md:h-[72px]]player-one-wins pt-[13px] px-5 md:px-[42px] pb-[11px] bg-light-blue-400 rounded-[15px] flex items-center flex-col">
           <p className="text-sm uppercase font-primary">{vsCpu ? 'X (You)' : 'X'}</p>
           <span className="text-2xl font-bold font-primary">
             {playerOneWins}
           </span>
         </div>
-        <div className="w-[140px] h-[72px]]ties pt-[13px] px-[42px] pb-[11px] bg-silver-400 rounded-[15px] flex items-center flex-col">
+        <div className="md:w-[140px] w-24 h-16 md:h-[72px]]ties pt-[13px] px-5 md:px-[42px] pb-[11px] bg-silver-400 rounded-[15px] flex items-center flex-col">
           <p className="text-sm uppercase font-primary">Ties</p>
           <span className="text-2xl font-bold font-primary">
             {ties}
           </span>
         </div>
-        <div className="w-[140px] h-[72px]]player-two-wins pt-[13px] px-[42px] pb-[11px] bg-light-yellow-400 rounded-[15px] flex items-center flex-col">
+        <div className="md:w-[140px] w-24 h-16 md:h-[72px]]player-two-wins pt-[13px] px-5 md:px-[42px] pb-[11px] bg-light-yellow-400 rounded-[15px] flex items-center flex-col">
           <p className="text-sm uppercase font-primary">{vsCpu ? 'O (Cpu)' : 'O'}</p>
           <span className="text-2xl font-bold font-primary">
             {playerTwoWins}

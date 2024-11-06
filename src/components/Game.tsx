@@ -46,14 +46,14 @@ const Game: React.FC<GameProps> = ({ isXFirst, handleQuit, vsCpu, updateScore, p
   }
 
   return (
-    <div className="game-container w-[460px]">
+    <div className="game-container md:w-[460px] w-[328px]">
       {showMenu ? (
         <Menu onGameStart={() => setShowMenu(false)} />
       ) : (
         <>
           <div className="flex items-center justify-between mb-4 game-header">
             <img src="/assets/images/logo.svg" className="w-[72px] h-8" alt="logo" width="72" height="32" />
-            <div className="uppercase turn-info pt-[13px] pb-[19px] px-[30px] bg-dark-navi-500 rounded-[10px] turn-shadow w-[140px] mr-5 text-center">
+            <div className="uppercase turn-info pt-[13px] pb-[19px] px-[30px] bg-dark-navi-500 rounded-[10px] turn-shadow md:w-[140px] w-24 mr-5 text-center">
               <p className="text-silver-400 text-heading-xs">
                 {xIsNext ? 'X' : 'O'} turn
               </p>

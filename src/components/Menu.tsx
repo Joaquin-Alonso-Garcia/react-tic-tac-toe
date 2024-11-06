@@ -10,7 +10,7 @@ const Menu: React.FC<{ onGameStart: (isXFirst: boolean, cpuGame: boolean) => voi
   };
 
   return (
-    <div className="menu-container w-[460px]">
+    <div className="menu-container md:w-[460px] w-[328px]">
       <div className="flex justify-center mb-10 logo">
         <img src="/assets/images/logo.svg" alt="logo" />
       </div>
@@ -21,7 +21,7 @@ const Menu: React.FC<{ onGameStart: (isXFirst: boolean, cpuGame: boolean) => voi
           </h1>
         </div>
         <div className="flex justify-center pick mt-6 mb-[17px] bg-dark-navi-400 rounded-[10px]">
-          <div className={`choice w-[198px] my-[9px] flex justify-center rounded-[10px] ${xStarts ? 'bg-silver-400': 'bg-dark-navi-400'}`}>
+          <div className={`choice md:w-[198px] w-[132px] my-[9px] flex justify-center rounded-[10px] ${xStarts ? 'bg-silver-400': 'bg-dark-navi-400'}`}>
             <label htmlFor="playerX" className={`cursor-pointer ${xStarts ? "text-dark-navi-400" : "text-dark-navi-400"}`}>
               {xStarts ? (
                 <svg className="scale-50" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +36,7 @@ const Menu: React.FC<{ onGameStart: (isXFirst: boolean, cpuGame: boolean) => voi
             <input type="radio" name="choice" id="playerX" className="hidden" onClick={handleChoice} />
           </div>
 
-          <div className={`choice w-[198px] my-[9px] flex justify-center rounded-[10px] ${!xStarts ? 'bg-silver-400': 'bg-dark-navi-400'}`}>
+          <div className={`choice md:w-[198px] w-[132px] my-[9px] flex justify-center rounded-[10px] ${!xStarts ? 'bg-silver-400': 'bg-dark-navi-400'}`}>
             <label htmlFor="playerO" className={`cursor-pointer ${!xStarts ? "text-silver-400" : "text-dark-navi-400"}`}>
               {!xStarts ? (
                 <svg className="scale-50" width="64" height="64" xmlns="http://www.w3.org/2000/svg">
